@@ -1,38 +1,29 @@
-const test1 = [8, 5, 2, 9, 5, 6, 3]
+const test1 = [8, 5, 4, 2, 9, 5, 6, 3]
 
 function selectionSort(array) {
-  // Helper function to find smallest item in array
-  function findSmallest(subArray) {
-    let smallest;
+  // Loop over all the items in array
+  for (let i=0; i<array.length; i++){
 
-    subArray.forEach(item => {
-      if (!smallest){
-        smallest = item
-      } else {
-        smallest = item > smallest ? smallest : item
-      }    
-    })
+    // Find the smallest number in sub array
+    let smallestNindex = i
+    for(let subArrayStart = i+1; subArrayStart<array.length; subArrayStart++){
+      let firstNumberInSubArray = array[subArrayStart]
+      let smallestNumberInsubArray = array[smallestNindex]
 
-    return smallest
-  }
-  
-  // Loop over the array
-  for (let pointer = 0; pointer < array.length; pointer++) {
-    let unsorted = array.slice(pointer)
-    let indexOfSmallest = unsorted.indexOf(findSmallest(unsorted))
+      if(firstNumberInSubArray < smallestNumberInsubArray)
+        smallestNindex = subArrayStart
+      }
+    }
 
-    // Swap values in array
-    let temp = array[pointer]
-
-    array[pointer] = array[indexOfSmallest]
-    array[indexOfSmallest] = temp
+    if(smallestNindex != i){
+      // Swap items
+      let tmp = array[i]
+      array[i] = array[smallestNindex]
+      array[smallestNindex] = tmp
+    }
   }
   
   return array
 }
 
-
-// Do not edit the line below.
-//exports.selectionSort = selectionSort;
-
-console.log(selectionSort(test1));
+console.log(selectionSort(test1)); 
