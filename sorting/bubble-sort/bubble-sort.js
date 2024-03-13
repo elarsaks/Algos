@@ -1,39 +1,27 @@
-const test1 = [8, 5, 2, 9, 5, 6, 3]
-
-
 function bubbleSort(array) {
-  // Insert value into hadToSort to start do while loop
-  let hadToSort = [true]
+  let hadToSort;
 
   do {
-    // Set hadToSort to empty (false) on every iteration
-    hadToSort = []
+    // Reset hadToSort to false at the beginning of each iteration
+    hadToSort = false;
 
-    // Loop over an array
-    for (let i = 0; i < array.length; i++){
+    // Loop over the array
+    for (let i = 1; i < array.length; i++) {
+      // Compare current element with the previous one
+      if (array[i - 1] > array[i]) {
+        // Swap if elements are in wrong order
+        [array[i - 1], array[i]] = [array[i], array[i - 1]];
 
-        // Assign left and right pointer
-        let leftPointer = array[i-1]
-        let rightPointer = array[i]
-
-       // If right pointer value is bigger than left pointer value
-        if(leftPointer > rightPointer){
-          // Swap values in array
-          array[i-1] = rightPointer
-          array[i] = leftPointer
-
-          // Set has to sort true
-          hadToSort.push(true)
-        }
+        // Mark as had to sort
+        hadToSort = true;
+      }
     }
+    // Repeat until no swaps are needed
+  } while (hadToSort);
 
-    // Call this for loop until hadToSort return false
-  } while (hadToSort.length > 0)
-
-    // At the end return sorted array
-    return array
+  // Return the sorted array
+  return array;
 }
-// Do not edit the line below.
-//exports.bubbleSort = bubbleSort;
 
+const test1 = [8, 5, 2, 9, 5, 6, 3];
 console.log(bubbleSort(test1));
